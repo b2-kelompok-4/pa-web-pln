@@ -1,6 +1,11 @@
 <h2 style="display:inline-flex;">Pembayaran</h2>
 <form action="" method="POST">
-    <input type="text" class="form-input mt-2" name="meter" placeholder="Nomor Meter" style="height: 40px; font-size: 20px; display: inline-block" autofocus list="input" autocomplete="off" onchange="submit()">
+    <?php
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager') : ?>
+        <input type="text" class="form-input mt-2" name="meter" placeholder="Nomor Meter" style="height: 40px; font-size: 20px; display: inline-block" autofocus list="input" autocomplete="off" onchange="submit()">
+        <a href="admin.php?page=history" class="btn-xs btn-hijau" style="margin-left: 200px;">History</a>
+
+    <?php endif; ?>
     <datalist id="input">
         <?php
         $query = mysqli_query($conn, "SELECT * FROM meter");
@@ -9,7 +14,6 @@
             <option value="<?php echo $row['no_meter'] ?>"><?php echo $row['pemilik'] ?></option>
         <?php } ?>
     </datalist>
-    <a href="admin.php?page=history" class="btn-xs btn-hijau" style="margin-left: 200px;">History</a>
 </form>
 
 <table class="mt-5">
