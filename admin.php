@@ -1,7 +1,7 @@
 <?php include 'include/config.php' ?>
 <?php
 session_start();
-if ($_SESSION['status'] != 'login') {
+if ($_SESSION['status'] != 'login' && $_SESSION['role'] != 'admin') {
     header('location: login.php?pesan=belum_login');
 }
 ?>
