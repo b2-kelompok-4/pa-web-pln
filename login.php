@@ -19,6 +19,8 @@
                     <input type="text" name="user" placeholder="Username" class="form-input mt-5" style="width:100%; font-size: 16px;" autofocus>
                     <input type="password" name="pass" placeholder="Password" class="form-input mt-2" style="width:100%; font-size: 16px;">
                     <button type="submit" name="login" class="btn btn-biru mt-2" style="width: 100%; font-size: 16px">Login</button>
+                    <p>Belum memiliki akun?
+                <a href="register.php">Register</a>
                     <?php
                     if (isset($_GET['pesan'])) {
                         if ($_GET['pesan'] == "gagal") {
