@@ -25,6 +25,7 @@ if (isset($_POST['tambah'])) {
     $telp = htmlspecialchars($_POST['telp']);
     $tarif = htmlspecialchars($_POST['tarif']);
     mysqli_query($conn, "ALTER TABLE meter AUTO_INCREMENT = 1");
+    
     $add = mysqli_query($conn, "INSERT INTO meter VALUES (NULL, '$kwh', '$nama', '$alamat', '$telp', '$tarif')");
     header('location: admin.php?page=pelanggan');
 }
