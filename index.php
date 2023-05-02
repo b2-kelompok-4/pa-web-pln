@@ -20,6 +20,7 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="index.php?page=tagihan">Cek Tagihan</a></li>
             <li><a href="login.php">Login</a></li>
+            <li><a href="index.php?page=about">Tentang Kami</a></li>
         </ul>
     </nav>
     <div class="wrapper">
@@ -30,7 +31,10 @@
                     if ($_GET['page'] == 'tagihan') {
                         include 'cektagihan/tagihan.php';
                     }
-                } else {
+                    else if ($_GET['page'] == 'about') {
+                        include 'about.php';
+                    }
+                }else {
                     include 'home.php';
                 }
                 ?>
