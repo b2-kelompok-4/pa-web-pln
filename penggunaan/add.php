@@ -1,14 +1,14 @@
 <?php
-    $meter = $_GET['meter'];
+$meter = $_GET['meter'];
 ?>
 <h2>Input Penggunaan</h2>
 <form action="" method="POST">
     <label for="id">No. Meter</label>
-    <input type="text" name="meter" class="form-input" id="id" value="<?php echo $meter?>" readonly>
+    <input type="text" name="meter" class="form-input" id="id" value="<?php echo $meter ?>" readonly>
     <label for="bulan">Bulan</label>
-    <input type="text" name="bulan" class="form-input" id="bulan" value="<?php echo bulan(date('m'))?>" readonly>
+    <input type="text" name="bulan" class="form-input" id="bulan" value="<?php echo bulan(date('m')) ?>" readonly>
     <label for="tahun">Tahun</label>
-    <input type="text" name="tahun" class="form-input" id="tahun" value="<?php echo date('Y')?>" readonly>
+    <input type="text" name="tahun" class="form-input" id="tahun" value="<?php echo date('Y') ?>" readonly>
     <label for="mawal">Meter Awal</label>
     <input type="text" name="mawal" class="form-input" id="mawal" autofocus>
     <label for="makhir">Meter Akhir</label>
@@ -17,18 +17,22 @@
     <button type="reset" class="btn btn-merah mt-2">Reset</button>
 </form>
 <?php
-    if(isset($_POST['simpan'])){
-        $meter = $_POST['meter'];
-        $bulan = date('m');
-        $tahun = $_POST['tahun'];
-        $mawal = $_POST['mawal'];
-        $makhir = $_POST['makhir'];
-        $sql = mysqli_query($conn, "INSERT INTO penggunaan VALUES ('', '$meter', '$bulan', '$tahun', '$mawal', '$makhir')");
-        if($sql){ ?>
-            <script>window.alert('Data Penggunaan Berhasil ditambahkan ke No. Meter <?php echo $meter ?>');
-            window.location='admin.php?page=penggunaan'</script>
-        <?php }else{
-            echo 'Gagal';
-        }
+if (isset($_POST['simpan'])) {
+    $meter = $_POST['meter'];
+    $bulan = date('m');
+    $tahun = $_POST['tahun'];
+    $mawal = $_POST['mawal'];
+    $makhir = $_POST['makhir'];
+    mysqli_query($conn, "ALTER TABLE penggunaan AUTO_INCREMENT = 1");
+    $sql = mysqli_query($conn, "INSERT INTO penggunaan VALUES (null, '$meter', '$bulan', '$tahun', '$mawal', '$makhir')");
+    if ($sql) { ?>
+        <script>
+            window.alert('Data Penggunaan Berhasil ditambahkan ke No. Meter <?php echo $meter ?>');
+            window.location = 'admin.php?page=penggunaan'
+        </script>
+<?php } else {
+        die('Gagal');
+        // echo 'Gagal';
     }
+}
 ?>
