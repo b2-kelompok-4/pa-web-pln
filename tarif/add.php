@@ -10,6 +10,7 @@
 if (isset($_POST['tambah'])) {
     $daya = htmlspecialchars($_POST['daya']);
     $kwh = htmlspecialchars($_POST['kwh']);
+    mysqli_query($conn, "ALTER TABLE tarif AUTO_INCREMENT = 1");
     mysqli_query($conn, "INSERT INTO tarif (daya,tarif_kwh) VALUES ('$daya', '$kwh')");
     header('location: admin.php?page=tarif');
 }
