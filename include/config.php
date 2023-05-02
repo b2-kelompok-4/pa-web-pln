@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', 'anugrah', 'db_pln');
+$conn = mysqli_connect('localhost', 'root', '', 'db_pln');
 
 function bulan($angka)
 {
