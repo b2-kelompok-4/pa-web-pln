@@ -30,18 +30,16 @@ $nama = $row['nama'];
         <div class="sidebar">
             <h2>PLN PPOB</h2>
             <ul>
-                <li><a href="admin.php?page=tarif">Tarif</a></li>
-                <li><a href="admin.php?page=pelanggan">Pelanggan</a></li>
-                <li><a href="admin.php?page=penggunaan">Penggunaan</a></li>
-                <li><a href="admin.php?page=tagihan">Tagihan</a></li>
-                <li><a href="admin.php?page=pembayaran">Pembayaran</a></li>
-                <li><a href="admin.php?page=laporan">List Staff</a></li>
-
+                <li><a href="staff.php?page=tarif">Tarif</a></li>
+                <li><a href="staff.php?page=pelanggan">Pelanggan</a></li>
+                <li><a href="staff.php?page=penggunaan">Penggunaan</a></li>
+                <li><a href="staff.php?page=tagihan">Tagihan</a></li>
+                <li><a href="staff.php?page=pembayaran">Pembayaran</a></li>
             </ul>
         </div>
         <div class="main_content">
             <div class="header">
-                <div class="header-brand">Selamat Datang <?php echo $nama; ?></div>
+                <div class="header-brand">Selamat datang <?php echo $nama; ?></div>
                 <div class="header-item">
                     <a href="logout.php" class="btn-xs btn-biru">Logout</a>
                 </div>
@@ -51,11 +49,11 @@ $nama = $row['nama'];
                 if (isset($_GET['page'])) {
                     if ($_GET['page'] == 'tarif') {
                         include 'tarif/tarif.php';
-                    } elseif ($_GET['page'] == 'addTarif') {
+                    } elseif ($_GET['page'] == 'add') {
                         include 'tarif/add.php';
-                    } elseif ($_GET['page'] == 'editTarif') {
+                    } elseif ($_GET['page'] == 'edit') {
                         include 'tarif/edit.php';
-                    } elseif ($_GET['page'] == 'deleteTarif') {
+                    } elseif ($_GET['page'] == 'delete') {
                         include 'tarif/delete.php';
 
                     } elseif ($_GET['page'] == 'pelanggan') {
