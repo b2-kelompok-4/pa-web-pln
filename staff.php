@@ -30,18 +30,16 @@ $nama = $row['nama'];
         <div class="sidebar">
             <h2>PLN PPOB</h2>
             <ul>
-                <li><a href="admin.php?page=tarif">Tarif</a></li>
-                <li><a href="admin.php?page=pelanggan">Pelanggan</a></li>
-                <li><a href="admin.php?page=penggunaan">Penggunaan</a></li>
-                <li><a href="admin.php?page=tagihan">Tagihan</a></li>
-                <li><a href="admin.php?page=pembayaran">Pembayaran</a></li>
-                <li><a href="admin.php?page=listStaff">List Staff</a></li>
-
+                <li><a href="staff.php?page=tarif">Tarif</a></li>
+                <li><a href="staff.php?page=pelanggan">Pelanggan</a></li>
+                <li><a href="staff.php?page=penggunaan">Penggunaan</a></li>
+                <li><a href="staff.php?page=tagihan">Tagihan</a></li>
+                <li><a href="staff.php?page=pembayaran">Pembayaran</a></li>
             </ul>
         </div>
         <div class="main_content">
             <div class="header">
-                <div class="header-brand">Selamat Datang <?php echo $nama; ?></div>
+                <div class="header-brand">Selamat datang <?php echo $nama; ?></div>
                 <div class="header-item">
                     <a href="logout.php" class="btn-xs btn-biru">Logout</a>
                 </div>
@@ -57,6 +55,7 @@ $nama = $row['nama'];
                         include 'tarif/edit.php';
                     } elseif ($_GET['page'] == 'deleteTarif') {
                         include 'tarif/delete.php';
+
                     } elseif ($_GET['page'] == 'pelanggan') {
                         include 'pelanggan/pelanggan.php';
                     } elseif ($_GET['page'] == 'addPelanggan') {
@@ -65,18 +64,23 @@ $nama = $row['nama'];
                         include 'pelanggan/edit.php';
                     } elseif ($_GET['page'] == 'deletePelanggan') {
                         include 'pelanggan/delete.php';
+
                     } elseif ($_GET['page'] == 'penggunaan') {
                         include 'penggunaan/penggunaan.php';
+
                     } elseif ($_GET['page'] == 'tagihan') {
                         include 'tagihan/tagihan.php';
+
                     } elseif ($_GET['page'] == 'pembayaran') {
                         include 'pembayaran/pembayaran.php';
+
                     } elseif ($_GET['page'] == 'addPenggunaan') {
                         include 'penggunaan/add.php';
                     } elseif ($_GET['page'] == 'editPenggunaan') {
                         include 'penggunaan/edit.php';
                     } elseif ($_GET['page'] == 'addMakhir') {
                         include 'penggunaan/addMakhir.php';
+
                     } elseif ($_GET['page'] == 'bayar') {
                         include 'pembayaran/bayar.php';
                     } elseif ($_GET['page'] == 'history') {
@@ -85,15 +89,17 @@ $nama = $row['nama'];
                         include 'petugas/petugas.php';
                     } elseif ($_GET['page'] == 'addPetugas') {
                         include 'petugas/add.php';
-                    } elseif ($_GET['page'] == 'listStaff') {
-                        include 'list_staff/staff.php';
-                    } elseif ($_GET['page'] == 'addStaff') {
-                        include 'list_staff/add.php';
-                    } elseif ($_GET['page'] == 'editStaff') {
-                        include 'list_staff/edit.php';
-                    } elseif ($_GET['page'] == 'deleteStaff') {
-                        include 'list_staff/delete.php';
-                    }
+
+                    } elseif ($_GET['page'] == 'laporan') {
+                        include 'laporan/laporan.php';
+                    } elseif ($_GET['page'] == 'addLaporan') {
+                        include 'laporan/add.php';
+                    } elseif ($_GET['page'] == 'editLaporan') {
+                        include 'laporan/edit.php';
+                    } elseif ($_GET['page'] == 'deleteLaporan') {
+                        include 'laporan/delete.php';
+                    } 
+
                 } else {
                     include 'tarif/tarif.php';
                 }

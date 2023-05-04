@@ -62,11 +62,11 @@ if (isset($_POST['login'])) {
             if ($row['aktif'] == 1) {
                 $role = $row['role'];
                 // Lakukan Verifiasi Role
-                if ($role == 'manager') {
-                    $_SESSION['role'] = 'manager';
+                if ($role == 'staff') {
+                    $_SESSION['role'] = 'staff';
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['status'] = 'login';
-                    header('Location: manager.php');
+                    header('Location: staff.php');
                     die();
                 } else if ($role == 'admin') {
                     $_SESSION['role'] = 'admin';

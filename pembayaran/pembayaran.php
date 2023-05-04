@@ -1,10 +1,9 @@
 <h2 style="display:inline-flex;">Pembayaran</h2>
 <form action="" method="POST">
     <?php
-    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager') : ?>
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'staff') : ?>
         <input type="text" class="form-input mt-2" name="meter" placeholder="Nomor Meter" style="height: 40px; font-size: 20px; display: inline-block" autofocus list="input" autocomplete="off" onchange="submit()">
-        <a href="admin.php?page=history" class="btn-xs btn-hijau" style="margin-left: 200px;">History</a>
-
+        <a href="<?= ($_SESSION['role'] == 'admin') ? 'admin.php?page=history' : 'staff.php?page=history' ?>" class="btn-xs btn-hijau" style="margin-left: 200px;">History</a>
     <?php endif; ?>
     <datalist id="input">
         <?php
@@ -32,7 +31,7 @@
         if (mysqli_num_rows($query) == 0) { ?>
             <script>
                 window.alert('Nomor Meter Tidak Ada')
-                window.location = 'admin.php?page=pelanggan'
+                window.location = '<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=pelanggan' : 'staff.php?page=pelanggan' ?>';
             </script>;
         <?php }
         $meter = $_POST['meter'];
@@ -46,7 +45,8 @@
                 $status = 'Sudah Bayar';
             } else {
                 $status = 'Belum Bayar';
-                $button = "<a href='admin.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+                $button = ($_SESSION['role'] == 'admin') ? "<a href='admin.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+
             } ?>
             <tr>
                 <td><?php echo $row['no_meter'] ?></td>

@@ -16,6 +16,6 @@
         $daya = $_POST['daya'];
         $kwh = $_POST['kwh'];
         mysqli_query($conn, "UPDATE tarif SET daya='$daya', tarif_kwh='$kwh' WHERE id_tarif='$id'");
-        header('location: ' . ($_SESSION['role'] == 'admin' ? 'admin.php?page=tarif' : 'staff.php?page=tarif'));
+        header('location: admin.php?page=tarif');
     }
 ?>

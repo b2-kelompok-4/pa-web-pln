@@ -23,16 +23,14 @@ if (isset($_POST['simpan'])) {
     $tahun = $_POST['tahun'];
     $mawal = $_POST['mawal'];
     $makhir = $_POST['makhir'];
-    mysqli_query($conn, "ALTER TABLE penggunaan AUTO_INCREMENT = 1");
     $sql = mysqli_query($conn, "INSERT INTO penggunaan VALUES (null, '$meter', '$bulan', '$tahun', '$mawal', '$makhir')");
     if ($sql) { ?>
         <script>
-            window.alert('Data Penggunaan Berhasil ditambahkan ke No. Meter <?php echo $meter ?>');
-            window.location = 'admin.php?page=penggunaan'
+            window.alert('Meter Akhir Berhasil ditambahkan');
+            window.location = '<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=penggunaan' : 'staff.php?page=penggunaan' ?>';
         </script>
 <?php } else {
-        die('Gagal');
-        // echo 'Gagal';
+        echo 'Gagal';
     }
 }
 ?>
