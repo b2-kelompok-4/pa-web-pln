@@ -1,5 +1,5 @@
 <h2 class="h2"><b>Data Pelanggan</b></h2>
-<a href="admin.php?page=addPelanggan" class="btn-xs btn-biru ml-2"">Tambah</a>
+<a href="<?= ($_SESSION['role'] == 'admin') ? 'admin.php' : 'staff.php' ?>?page=addPelanggan" class="btn-xs btn-biru ml-2">Tambah</a>
 <table>
     <thead>
         <tr>
@@ -25,9 +25,9 @@
             <td><?php echo $row['alamat'] ?></td>
             <td><?php echo $row['telp'] ?></td>
             <td><?php echo $row['daya'] ?></td>
-            <td><a href=" admin.php?page=editPelanggan&id=<?php echo $row['id_meter'] ?>" class="btn-xs btn-kuning">Edit</a>
-<a href="admin.php?page=deletePelanggan&id=<?php echo $row['id_meter'] ?>" class="btn-xs btn-merah">Hapus</a></td>
-</tr>
+            <td><a href="<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=editPelanggan&id='.$row['id_meter'] : 'staff.php?page=editPelanggan&id='.$row['id_meter'] ?>" class="btn-xs btn-kuning">Edit</a>
+                <a href="<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=deletePelanggan&id='.$row['id_meter'] : 'staff.php?page=deletePelanggan&id='.$row['id_meter'] ?>" class="btn-xs btn-merah">Hapus</a>
+            </tr>
 <?php } ?>
 </tbody>
 </table>

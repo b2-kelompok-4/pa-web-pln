@@ -49,11 +49,11 @@ $nama = $row['nama'];
                 if (isset($_GET['page'])) {
                     if ($_GET['page'] == 'tarif') {
                         include 'tarif/tarif.php';
-                    } elseif ($_GET['page'] == 'add') {
+                    } elseif ($_GET['page'] == 'addTarif') {
                         include 'tarif/add.php';
-                    } elseif ($_GET['page'] == 'edit') {
+                    } elseif ($_GET['page'] == 'editTarif') {
                         include 'tarif/edit.php';
-                    } elseif ($_GET['page'] == 'delete') {
+                    } elseif ($_GET['page'] == 'deleteTarif') {
                         include 'tarif/delete.php';
 
                     } elseif ($_GET['page'] == 'pelanggan') {

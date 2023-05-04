@@ -26,8 +26,10 @@
         $m_akhir = $_POST['makhir'];
         $sql = mysqli_query($conn, "UPDATE penggunaan SET meter_akhir='$m_akhir' WHERE id_penggunaan='$id'");
         if ($sql) { ?>
-            <script>window.alert('Meter Akhir berhasil diubah');
-                    window.location='admin.php?page=penggunaan'</script>
+            <script>
+                window.alert('Meter Akhir Berhasil diubah');
+                window.location = '<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=penggunaan' : 'staff.php?page=penggunaan' ?>';
+            </script>
         <?php } else {
             echo 'gagal';
         }
