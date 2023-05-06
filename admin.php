@@ -34,7 +34,6 @@ $nama = $row['nama'];
                 <li><a href="admin.php?page=pelanggan">Pelanggan</a></li>
                 <li><a href="admin.php?page=penggunaan">Penggunaan</a></li>
                 <li><a href="admin.php?page=tagihan">Tagihan</a></li>
-                <li><a href="admin.php?page=pembayaran">Pembayaran</a></li>
                 <li><a href="admin.php?page=listStaff">List Staff</a></li>
 
             </ul>
@@ -69,16 +68,12 @@ $nama = $row['nama'];
                         include 'penggunaan/penggunaan.php';
                     } elseif ($_GET['page'] == 'tagihan') {
                         include 'tagihan/tagihan.php';
-                    } elseif ($_GET['page'] == 'pembayaran') {
-                        include 'pembayaran/pembayaran.php';
                     } elseif ($_GET['page'] == 'addPenggunaan') {
                         include 'penggunaan/add.php';
                     } elseif ($_GET['page'] == 'editPenggunaan') {
                         include 'penggunaan/edit.php';
                     } elseif ($_GET['page'] == 'addMakhir') {
                         include 'penggunaan/addMakhir.php';
-                    } elseif ($_GET['page'] == 'bayar') {
-                        include 'pembayaran/bayar.php';
                     } elseif ($_GET['page'] == 'history') {
                         include 'pembayaran/history.php';
                     } elseif ($_GET['page'] == 'petugas') {

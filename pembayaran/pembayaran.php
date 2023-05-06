@@ -45,7 +45,7 @@
                 $status = 'Sudah Bayar';
             } else {
                 $status = 'Belum Bayar';
-                $button = ($_SESSION['role'] == 'admin') ? "<a href='admin.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+                $button = ($_SESSION['role'] == 'user') ? "<a href='user.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
 
             } ?>
             <tr>
