@@ -1,9 +1,16 @@
-<?php include 'include/config.php' ?>
+<!--  -->
 <?php
+include 'include/config.php';
 session_start();
-if ($_SESSION['status'] != 'login') {
+if ($_SESSION['status'] != 'login' && $_SESSION['role'] != 'user') {
     header('location: login.php?pesan=belum_login');
 }
+
+$username = $_SESSION['username'];
+$sql = "SELECT nama FROM login WHERE username='$username'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$nama = $row['nama'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +34,8 @@ if ($_SESSION['status'] != 'login') {
                 <li><a href="admin.php?page=pelanggan">Pelanggan</a></li>
                 <li><a href="admin.php?page=penggunaan">Penggunaan</a></li>
                 <li><a href="admin.php?page=tagihan">Tagihan</a></li> -->
-                <li><a href="user.php?page=pembayaran">Pembayaran</a></li>
+                <li><a href="user.php?page=daftar">Daftar</a></li>
+                <li><a href="user.php?page=penggunaan">Tagihan</a></li>
             </ul>
         </div>
         <div class="main_content">
@@ -40,15 +48,19 @@ if ($_SESSION['status'] != 'login') {
             <div class="info">
                 <?php
                 if (isset($_GET['page'])) {
-                    if ($_GET['page'] == 'pembayaran') {
-                        include 'pembayaran/pembayaran.php';
+                    if ($_GET['page'] == 'penggunaan') {
+                        include 'pembayaran/penggunaan.php';
                     } elseif ($_GET['page'] == 'bayar') {
                         include 'pembayaran/bayar.php';
                     } elseif ($_GET['page'] == 'history') {
                         include 'pembayaran/history.php';
+                    }elseif ($_GET['page'] == 'daftar') {
+                        include 'pembayaran/daftar.php';
+                    }elseif ($_GET['page'] == 'tagihan') {
+                        include 'pembayaran/tagihan.php';
                     }
                 } else {
-                    echo 'Halo Selamat Datang ' . $_SESSION['username'];
+                    echo 'Halo Selamat Datang ' . $nama;
                 }
                 ?>
             </div>

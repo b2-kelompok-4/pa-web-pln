@@ -19,11 +19,11 @@ $total = $tagihan + 2000;
     <label for="total">Total (Rp.)</label>
     <input type="text" id="total" class="form-input" readonly value="<?php echo $total ?>" name="total">
     <button type="submit" name="btn_bayar" class="btn btn-biru mt-2">
-        <b><?php echo ($_SESSION['role'] == 'admin') ? 'Bayar' : 'Kirim' ?></b>
+        <b><?php echo ($_SESSION['role'] == 'user') ? 'Bayar' : 'Kirim' ?></b>
     </button>
 
 </form>
-<button type="submit" name="btn_kembali" class="btn btn-merah mt-2" onclick="window.location.href ='<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=pembayaran' : 'staff.php?page=pembayaran' ?>'"><b>Kembali</b></button>
+<button type="submit" name="btn_kembali" class="btn btn-merah mt-2" onclick="window.location.href ='<?php echo ($_SESSION['role'] == 'user') ? 'user.php' : 'user.php' ?>'"><b>Kembali</b></button>
 
 
 <?php
