@@ -20,20 +20,20 @@
                     <input type="password" name="pass" placeholder="Password" class="form-input mt-2" style="width:100%; font-size: 16px;">
                     <button type="submit" name="login" class="btn btn-biru mt-2" style="width: 100%; font-size: 16px">Login</button>
                     <p>Belum memiliki akun?
-                <a href="register.php">Register</a>
-                    <?php
-                    if (isset($_GET['pesan'])) {
-                        if ($_GET['pesan'] == "gagal") {
-                            echo "<p class='mt-2'>Login Gagal! Username dan Password Salah!</p>";
-                        } else if ($_GET['pesan'] == "logout") {
-                            echo "<p class='mt-2'>Anda Telah Berhasil Logout</p>";
-                        } else if ($_GET['pesan'] == "belum_login") {
-                            echo "<p class='mt-2'>Anda Harus Login Untuk Mengakses Halaman Admin</p>";
-                        } else if ($_GET['pesan'] == "belum_aktif") {
-                            echo "<p class='mt-2'>Akun Anda Belum Aktif</p>";
+                        <a href="register.php">Register</a>
+                        <?php
+                        if (isset($_GET['pesan'])) {
+                            if ($_GET['pesan'] == "gagal") {
+                                echo "<p class='mt-2'>Login Gagal! Username dan Password Salah!</p>";
+                            } else if ($_GET['pesan'] == "logout") {
+                                echo "<p class='mt-2'>Anda Telah Berhasil Logout</p>";
+                            } else if ($_GET['pesan'] == "belum_login") {
+                                echo "<p class='mt-2'>Anda Harus Login Untuk Mengakses Halaman Admin</p>";
+                            } else if ($_GET['pesan'] == "belum_aktif") {
+                                echo "<p class='mt-2'>Akun Anda Belum Aktif</p>";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
                 </form>
             </div>
         </div>
@@ -58,32 +58,29 @@ if (isset($_POST['login'])) {
         // Lakukan verifikasi password
         if (password_verify($pass, $password_db)) {
             // Password valid
-            // Lakukan Verifikasi Akun Aktif atau Tidak
-            if ($row['aktif'] == 1) {
-                $role = $row['role'];
-                // Lakukan Verifiasi Role
-                if ($role == 'staff') {
-                    $_SESSION['role'] = 'staff';
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['status'] = 'login';
-                    header('Location: staff.php');
-                    die();
-                } else if ($role == 'admin') {
-                    $_SESSION['role'] = 'admin';
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['status'] = 'login';
-                    header('Location: admin.php');
-                    die();
-                } else if ($role == 'user') {
-                    $_SESSION['role'] = 'user';
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['status'] = 'login';
-                    header('Location: user.php');
-                    die();
-                }
-            } else {
-                // Tampilkan akun anda belum aktif
-                header('location: login.php?pesan=belum_aktif');
+            $role = $row['role'];
+            // Lakukan Verifiasi Role
+            if ($role == 'staff') {
+                $_SESSION['id_login'] = $row['id_login'];
+                $_SESSION['role'] = 'staff';
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['status'] = 'login';
+                header('Location: staff.php');
+                die();
+            } else if ($role == 'admin') {
+                $_SESSION['id_login'] = $row['id_login'];
+                $_SESSION['role'] = 'admin';
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['status'] = 'login';
+                header('Location: admin.php');
+                die();
+            } else if ($role == 'user') {
+                $_SESSION['id_login'] = $row['id_login'];
+                $_SESSION['role'] = 'user';
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['status'] = 'login';
+                header('Location: user.php');
+                die();
             }
         } else {
             // Password tidak valid

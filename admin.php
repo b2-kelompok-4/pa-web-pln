@@ -58,6 +58,8 @@ $nama = $row['nama'];
                         include 'tarif/delete.php';
                     } elseif ($_GET['page'] == 'pelanggan') {
                         include 'pelanggan/pelanggan.php';
+                    } elseif ($_GET['page'] == 'activatePelanggan') {
+                        include 'pelanggan/aktifasi.php';
                     } elseif ($_GET['page'] == 'addPelanggan') {
                         include 'pelanggan/add.php';
                     } elseif ($_GET['page'] == 'editPelanggan') {

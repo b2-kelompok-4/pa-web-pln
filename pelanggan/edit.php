@@ -6,7 +6,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 ?>
     <form action="" method="POST">
         <label for="kwh">No. Meter</label>
-        <input type="text" name="no_meter" class="form-input" id="no_meter" value="<?php echo $row['no_meter'] ?>">
+        <input type="text" readonly name="no_meter" class="form-input" id="no_meter" value="<?php echo $row['no_meter'] ?>">
         <label for="nama">Nama</label>
         <input type="text" name="nama" class="form-input" id="nama" value="<?php echo $row['pemilik'] ?>">
         <label for="alamat">Alamat</label>

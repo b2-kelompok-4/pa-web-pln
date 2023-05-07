@@ -22,18 +22,18 @@
                     <input type="password" name="cpass" placeholder="Konfirmasi Password" class="form-input mt-2" style="width:100%; font-size: 16px;">
                     <button type="submit" name="login" class="btn btn-biru mt-2" style="width: 100%; font-size: 16px">Register</button>
                     <p>Belum memiliki akun?
-                <a href="login.php">Login</a>
-                    <?php
-                    if (isset($_GET['pesan'])) {
-                        if ($_GET['pesan'] == "gagal") {
-                            echo "<p class='mt-2'>Login gagal! username dan password salah!</p>";
-                        } else if ($_GET['pesan'] == "logout") {
-                            echo "<p class='mt-2'>Anda telah berhasil logout</p>";
-                        } else if ($_GET['pesan'] == "belum_login") {
-                            echo "<p class='mt-2'>Anda harus login untuk mengakses halaman admin</p>";
+                        <a href="login.php">Login</a>
+                        <?php
+                        if (isset($_GET['pesan'])) {
+                            if ($_GET['pesan'] == "gagal") {
+                                echo "<p class='mt-2'>Login gagal! username dan password salah!</p>";
+                            } else if ($_GET['pesan'] == "logout") {
+                                echo "<p class='mt-2'>Anda telah berhasil logout</p>";
+                            } else if ($_GET['pesan'] == "belum_login") {
+                                echo "<p class='mt-2'>Anda harus login untuk mengakses halaman admin</p>";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
                 </form>
             </div>
         </div>
@@ -57,44 +57,39 @@ if (isset($_POST['login'])) {
     $nama = $_POST['nama'];
     $user = $_POST['user'];
     $pass = $_POST['pass'];
-    $cpass=$_POST['cpass'];
+    $cpass = $_POST['cpass'];
     // cek username udah digunakan apa belum
 
     $sql = "SELECT * FROM login where username='$user'";
     $username = $conn->query($sql);
 
-    if (mysqli_num_rows($username)>0){
+    if (mysqli_num_rows($username) > 0) {
         echo "<script>
         alert('Username sudah digunakan, silahkan menggunakan username yang lain') </script> ";
-    }
-    else {
-        if ($pass==$cpass){
-            $pass=password_hash($pass, PASSWORD_DEFAULT);
-            $query = "INSERT INTO login (nama, username, password, role, aktif) VALUES ('$nama', '$user','$pass','user', 0)";
-            $result=$conn->query($query);
-        
-            if ($result){
+    } else {
+        if ($pass == $cpass) {
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            mysqli_query($conn, "ALTER TABLE login AUTO_INCREMENT = 1");
+            $query = "INSERT INTO login (nama, username, password, role) VALUES ('$nama', '$user','$pass','user')";
+            $result = $conn->query($query);
+
+            if ($result) {
                 echo "<script>
                     alert('Registrasi berhasil')
                     document.location.href='index.php';
                      </script> ";
-            }
-            else{
+            } else {
                 echo "<script>
                     alert('Registrasi gagal')
                     document.location.href='index.php';
                      </script> ";
             }
-            
-        }
-        else{
+        } else {
             echo "<script>
                     alert('Password konfimasi tidak sama dengan password')
                     document.location.href='register.php';
                      </script> ";
         }
     }
-
 }
 ?>
-

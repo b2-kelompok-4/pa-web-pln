@@ -55,32 +55,28 @@ $nama = $row['nama'];
                         include 'tarif/edit.php';
                     } elseif ($_GET['page'] == 'deleteTarif') {
                         include 'tarif/delete.php';
-
                     } elseif ($_GET['page'] == 'pelanggan') {
                         include 'pelanggan/pelanggan.php';
+                    } elseif ($_GET['page'] == 'activatePelanggan') {
+                        include 'pelanggan/aktifasi.php';
                     } elseif ($_GET['page'] == 'addPelanggan') {
                         include 'pelanggan/add.php';
                     } elseif ($_GET['page'] == 'editPelanggan') {
                         include 'pelanggan/edit.php';
                     } elseif ($_GET['page'] == 'deletePelanggan') {
                         include 'pelanggan/delete.php';
-
                     } elseif ($_GET['page'] == 'penggunaan') {
                         include 'penggunaan/penggunaan.php';
-
                     } elseif ($_GET['page'] == 'tagihan') {
                         include 'tagihan/tagihan.php';
-
                     } elseif ($_GET['page'] == 'pembayaran') {
                         include 'pembayaran/pembayaran.php';
-
                     } elseif ($_GET['page'] == 'addPenggunaan') {
                         include 'penggunaan/add.php';
                     } elseif ($_GET['page'] == 'editPenggunaan') {
                         include 'penggunaan/edit.php';
                     } elseif ($_GET['page'] == 'addMakhir') {
                         include 'penggunaan/addMakhir.php';
-
                     } elseif ($_GET['page'] == 'bayar') {
                         include 'pembayaran/bayar.php';
                     } elseif ($_GET['page'] == 'history') {
@@ -89,7 +85,6 @@ $nama = $row['nama'];
                         include 'petugas/petugas.php';
                     } elseif ($_GET['page'] == 'addPetugas') {
                         include 'petugas/add.php';
-
                     } elseif ($_GET['page'] == 'laporan') {
                         include 'laporan/laporan.php';
                     } elseif ($_GET['page'] == 'addLaporan') {
@@ -98,8 +93,7 @@ $nama = $row['nama'];
                         include 'laporan/edit.php';
                     } elseif ($_GET['page'] == 'deleteLaporan') {
                         include 'laporan/delete.php';
-                    } 
-
+                    }
                 } else {
                     include 'tarif/tarif.php';
                 }

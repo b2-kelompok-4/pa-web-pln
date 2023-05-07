@@ -30,17 +30,14 @@ $nama = $row['nama'];
         <div class="sidebar">
             <h2>PLN PPOB</h2>
             <ul>
-                <!-- <li><a href="admin.php?page=tarif">Tarif</a></li>
-                <li><a href="admin.php?page=pelanggan">Pelanggan</a></li>
-                <li><a href="admin.php?page=penggunaan">Penggunaan</a></li>
-                <li><a href="admin.php?page=tagihan">Tagihan</a></li> -->
                 <li><a href="user.php?page=daftar">Daftar</a></li>
-                <li><a href="user.php?page=penggunaan">Tagihan</a></li>
+                <li><a href="user.php?page=tagihan">Tagihan</a></li>
+                <li><a href="user.php?page=pembayaran">Pembayaran</a></li>
             </ul>
         </div>
         <div class="main_content">
             <div class="header">
-                <div class="header-brand">Dashboard</div>
+                <div class="header-brand">Selamat Datang <?php echo $nama; ?></div>
                 <div class="header-item">
                     <a href="logout.php" class="btn-xs btn-biru">Logout</a>
                 </div>
@@ -54,10 +51,12 @@ $nama = $row['nama'];
                         include 'pembayaran/bayar.php';
                     } elseif ($_GET['page'] == 'history') {
                         include 'pembayaran/history.php';
-                    }elseif ($_GET['page'] == 'daftar') {
-                        include 'pembayaran/daftar.php';
-                    }elseif ($_GET['page'] == 'tagihan') {
-                        include 'pembayaran/tagihan.php';
+                    } elseif ($_GET['page'] == 'daftar') {
+                        include 'daftar.php';
+                    } elseif ($_GET['page'] == 'tagihan') {
+                        include 'tagihan/tagihan.php';
+                    } elseif ($_GET['page'] == 'pembayaran') {
+                        include 'pembayaran/pembayaran.php';
                     }
                 } else {
                     echo 'Halo Selamat Datang ' . $nama;

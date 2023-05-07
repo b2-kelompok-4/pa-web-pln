@@ -27,37 +27,67 @@
     </tr>
     <?php
     if (isset($_POST['meter'])) {
-        $query = mysqli_query($conn, "SELECT * FROM meter INNER JOIN tarif ON meter.id_tarif=tarif.id_tarif WHERE no_meter ='$_POST[meter]'");
+        $query = mysqli_query($conn, "SELECT meter.id_meter,meter.no_meter,meter.pemilik,tagihan.id_tagihan,tagihan.jumlah_meter,tagihan.status,penggunaan.bulan,penggunaan.tahun FROM tagihan 
+        INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+        INNER JOIN meter ON penggunaan.no_meter=meter.no_meter  WHERE meter.no_meter ='$_POST[meter]'");
         if (mysqli_num_rows($query) == 0) { ?>
             <script>
                 window.alert('Nomor Meter Tidak Ada')
                 window.location = '<?php echo ($_SESSION['role'] == 'admin') ? 'admin.php?page=pelanggan' : 'staff.php?page=pelanggan' ?>';
             </script>;
-        <?php }
+            <?php }
         $meter = $_POST['meter'];
-        $query = mysqli_query($conn, "SELECT * FROM tagihan INNER JOIN penggunaan ON penggunaan.id_penggunaan = tagihan.id_penggunaan INNER JOIN meter ON meter.no_meter = penggunaan.no_meter WHERE meter.no_meter = '$meter' AND status!='1'");
+
+        // $query = mysqli_query($conn, "SELECT * FROM tagihan INNER JOIN penggunaan ON penggunaan.id_penggunaan = tagihan.id_penggunaan INNER JOIN meter ON meter.no_meter = penggunaan.no_meter WHERE meter.no_meter = '$meter' AND tagihan.status!='1'");
+
+        // $query_user = mysqli_query($conn, "SELECT * FROM tagihan INNER JOIN penggunaan ON penggunaan.id_penggunaan = tagihan.id_penggunaan INNER JOIN meter ON meter.no_meter = penggunaan.no_meter WHERE meter.id_login = '$id_login' AND tagihan.status!='1'");
 
         while ($row = mysqli_fetch_assoc($query)) {
-            // var_dump($row);
-            // die;
             $status = $row['status'];
             if ($status == 1) {
                 $status = 'Sudah Bayar';
             } else {
                 $status = 'Belum Bayar';
                 $button = ($_SESSION['role'] == 'user') ? "<a href='user.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+            ?>
+                <tr>
+                    <td><?php echo $row['no_meter'] ?></td>
+                    <td><?php echo $row['pemilik'] ?></td>
+                    <td><?php echo $row['jumlah_meter'] ?>KWH</td>
+                    <td><?php echo 'bulan'($row['bulan']) ?></td>
+                    <td><?php echo $row['tahun'] ?></td>
+                    <td><?php echo $status; ?></td>
+                    <td><?php echo $button; ?></td>
+                </tr>
+            <?php
+            }
+        }
+    } else {
+        $id_login = $_SESSION['id_login'];
 
-            } ?>
-            <tr>
-                <td><?php echo $row['no_meter'] ?></td>
-                <td><?php echo $row['pemilik'] ?></td>
-                <td><?php echo $row['jumlah_meter'] ?>KWH</td>
-                <td><?php echo 'bulan'($row['bulan']) ?></td>
-                <td><?php echo $row['tahun'] ?></td>
-                <td><?php echo $status; ?></td>
-                <td><?php echo $button; ?></td>
-            </tr>
+        $query = mysqli_query($conn, "SELECT meter.id_meter,meter.no_meter,meter.pemilik,tagihan.id_tagihan,tagihan.jumlah_meter,tagihan.status,penggunaan.bulan,penggunaan.tahun FROM tagihan 
+        INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+        INNER JOIN meter ON penggunaan.no_meter=meter.no_meter  WHERE meter.id_login = '$id_login'");
+
+        while ($row = mysqli_fetch_assoc($query)) {
+            $status = $row['status'];
+            if ($status == 1) {
+                $status = 'Sudah Bayar';
+            } else {
+                $status = 'Belum Bayar';
+                $button = ($_SESSION['role'] == 'user') ? "<a href='user.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+            ?>
+                <tr>
+                    <td><?php echo $row['no_meter'] ?></td>
+                    <td><?php echo $row['pemilik'] ?></td>
+                    <td><?php echo $row['jumlah_meter'] ?>KWH</td>
+                    <td><?php echo 'bulan'($row['bulan']) ?></td>
+                    <td><?php echo $row['tahun'] ?></td>
+                    <td><?php echo $status; ?></td>
+                    <td><?php echo $button; ?></td>
+                </tr>
     <?php
+            }
         }
     } ?>
 </table>
