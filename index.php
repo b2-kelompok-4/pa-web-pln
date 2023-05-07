@@ -18,7 +18,6 @@
                 <a href="">PLN</a>
             </div>
             <li><a href="index.php">Home</a></li>
-            <li><a href="index.php?page=tagihan">Cek Tagihan</a></li>
             <li><a href="login.php">Login</a></li>
             <li><a href="index.php?page=about">Tentang Kami</a></li>
         </ul>
@@ -28,13 +27,10 @@
             <div class="info" style="text-align:center">
                 <?php
                 if (isset($_GET['page'])) {
-                    if ($_GET['page'] == 'tagihan') {
-                        include 'cektagihan/tagihan.php';
-                    }
-                    else if ($_GET['page'] == 'about') {
+                    if ($_GET['page'] == 'about') {
                         include 'about.php';
                     }
-                }else {
+                } else {
                     include 'home.php';
                 }
                 ?>
