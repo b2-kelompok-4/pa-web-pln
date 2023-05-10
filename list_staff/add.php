@@ -16,7 +16,7 @@ if (isset($_POST['tambah'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $role = 'staff';
     mysqli_query($conn, "ALTER TABLE login AUTO_INCREMENT = 1");
-    mysqli_query($conn, "INSERT INTO login VALUES (null,'$nama', '$username', '$password', '$role',1)");
+    mysqli_query($conn, "INSERT INTO login (nama, username, password, role) VALUES ('$nama', '$username', '$password', '$role')");
     header('location: admin.php?page=listStaff');
 }
 ?>

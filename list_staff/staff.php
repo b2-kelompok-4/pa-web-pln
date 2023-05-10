@@ -19,7 +19,10 @@
             <td><?php echo $no++ ?></td>
             <td><?php echo $row['nama'] ?></td>
             <td><?php echo $row['role'] ?></td>
-            <td><a href=" admin.php?page=deleteStaff&id=<?php echo $row['id_login'] ?>" class="btn-xs btn-merah">Hapus</a></td>
+            <td>
+                <a href=" admin.php?page=editStaff&id=<?php echo $row['id_login'] ?>" class="btn-xs btn-kuning">Edit</a>
+                <a href=" admin.php?page=deleteStaff&id=<?php echo $row['id_login'] ?>" class="btn-xs btn-merah">Hapus</a>
+            </td>
 </tr>
 <?php } ?>
 </tbody>
