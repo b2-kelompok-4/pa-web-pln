@@ -135,11 +135,13 @@ Sekarang kita pergi ke halaman List Staff, disinilah fungsi managemen akan berja
 
 ### d. Tambah Staff
 
-Pertama kita menambah data, data yang saya masukkan adalah nama Ali Khatami, username ali dan password juga ali
+Pertama kita menambah data, sebagai contoh, disini data yang saya masukkan berisi nama Ali Khatami, username ali dan password juga ali
 
 ![4](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/be942784-1263-4f1e-8f4d-358859a604ce)
 
 Setelah data tersebut berhasil ditambahkan, maka tampilannya akan menjadi seperti ini (data Ali Khatami telah ditambahkan)
+
+![5](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/245a9402-7480-4b36-91ef-9737ab2f71e6)
 
 ### e. Login sebagai Staff baru
 
@@ -149,7 +151,7 @@ Kemudian kita logout dan login lagi menggunakan data staff yang baru saja kita t
 
 ### f. Tampilan Halaman Staff
 
-Sekarang kita kembali login lagi sebagai admin kemudian masuk lagi ke menu list staff
+Inilah hasil tampilan dari halaman staff yang baru saja kita tambahkan tadi dari halaman admin, sekarang kita kembali login lagi sebagai admin kemudian masuk lagi ke menu list staff
 
 ![7](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/b5fe9103-cddb-4f19-9db4-e3d57b751f91)
 
