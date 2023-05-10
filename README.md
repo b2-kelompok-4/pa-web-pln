@@ -113,8 +113,12 @@ Sama seperti pembayaran di User bedanya pada staff bisa melakukan semua pembayar
 ![Screenshot (287)](https://github.com/woodzim/pa-web-pln_indra/assets/104117101/bd9d1e46-171f-409e-affd-d976ea4f4d89)
 ![Screenshot (288)](https://github.com/woodzim/pa-web-pln_indra/assets/104117101/da5498e4-87b1-4f65-9640-d3902403efe3)
 
+
+
+
 ## 3. Admin
 
+Pada Halaman Admin terdapat 5 menu yaitu Tarif, Pelanggan, Penggunaan, Tagihan dan List Staff
 ### a. Login sebagai Admin
 
 Disini kita akan masuk sebagai admin, caranya adalah masukkan username 'admin' dengan password yang sama juga yaitu 'admin'
@@ -129,7 +133,7 @@ Ini adalah tampilan utama halaman admin, pada dasarnya, isi halaman admin hampir
 
 ### c. Menu List Staff
 
-Sekarang kita pergi ke halaman List Staff, disinilah fungsi managemen akan berjalan
+Sekarang pergi ke halaman List Staff, disinilah fungsi managemen akan berjalan
 
 ![3](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/6e319c2a-da47-46c1-ad6b-6eaef87f6915)
 
