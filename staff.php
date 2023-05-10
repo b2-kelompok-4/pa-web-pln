@@ -20,6 +20,7 @@ $nama = $row['nama'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="img/volt.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="style.css">
     <title>PLN PPOB</title>
 </head>
@@ -104,6 +105,7 @@ $nama = $row['nama'];
     <div class="footer footer2">
         <p align="center">Copyright &copy; 2023 B2 Kelompok 4</p>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
