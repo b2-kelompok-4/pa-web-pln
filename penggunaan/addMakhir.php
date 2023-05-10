@@ -70,6 +70,7 @@ if (isset($_POST['simpan'])) {
     $tahun = $_POST['tahun'];
     $mawal = $_POST['mawal'];
     $makhir = $_POST['makhir'];
+    mysqli_query($conn, "ALTER TABLE penggunaan AUTO_INCREMENT = 1");
     $sql = mysqli_query($conn, "INSERT INTO penggunaan VALUES (null, '$meter', '$bulan', '$tahun', '$mawal', '$makhir')");
     if ($sql) { ?>
         <script>

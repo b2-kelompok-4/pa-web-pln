@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 30, 2023 at 03:39 PM
+-- Generation Time: May 10, 2023 at 02:19 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -29,18 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `login` (
   `id_login` int NOT NULL,
+  `nama` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `level` tinyint NOT NULL,
-  `aktif` tinyint(1) NOT NULL DEFAULT '1'
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`id_login`, `username`, `password`, `level`, `aktif`) VALUES
-(1, 'admin', 'admin', 100, 1);
+INSERT INTO `login` (`id_login`, `nama`, `username`, `password`, `role`) VALUES
+(1, 'admin', 'admin', '$2y$10$z64.jBdEu9wKR/BeUrAKieC7o3Cuh0P86qyCSb1npnA1cTS0Qesy2', 'admin'),
+(2, 'staff', 'staff', '$2y$10$HzHWdSY9rc.CUB6vIHcqdul2DQdHc6IFfkUFFzZRQ.LzEMTgp/CwO', 'staff'),
+(3, 'Rizky', 'rizky', '$2y$10$zlriOSeaO9KcFrRN7TsAMe3NTmeIaU8bKeg.HJXph9iqDYFpJETH2', 'user'),
+(4, 'Indra Maulana', 'indra', '$2y$10$LIXoZqe3e19K4m3dSNWDwuRenMIjnUUHZnysRosaRqeWw4kXIqdUa', 'user'),
+(5, 'ali', 'ali', '$2y$10$oXiwmMm2Ly89lxgOC3YIQuOIBVBCWA6csJnN0yxnJqEJ.YkYlWqeq', 'user');
 
 -- --------------------------------------------------------
 
@@ -54,19 +58,18 @@ CREATE TABLE `meter` (
   `pemilik` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `telp` varchar(13) NOT NULL,
-  `id_tarif` int NOT NULL
+  `id_tarif` int NOT NULL,
+  `id_login` int NOT NULL,
+  `status` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `meter`
 --
 
-INSERT INTO `meter` (`id_meter`, `no_meter`, `pemilik`, `alamat`, `telp`, `id_tarif`) VALUES
-(38, '1111', 'Budi', 'Jalanan', '08234324234', 4),
-(39, '5555', 'budi', 'bumi', '08434234234', 4),
-(40, '2222', 'Jajang', 'Bumi', '08435453534', 4),
-(41, '3232', 'Kaka', 'Jalan', '0823443231', 4),
-(42, '2121', 'Jordy', 'Bumi', '08342876678', 5);
+INSERT INTO `meter` (`id_meter`, `no_meter`, `pemilik`, `alamat`, `telp`, `id_tarif`, `id_login`, `status`) VALUES
+(1, '0232120417', 'Rizky Anugrah', 'Jalan Biawan', '085754612468', 1, 3, 1),
+(3, '5542872143', 'Ali Khatami', 'Lambung Mangkurat', '0872713881', 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -88,23 +91,8 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `id_login`, `id_tagihan`, `tanggal_bayar`, `biaya_admin`, `biaya_tagihan`) VALUES
-(7, 1, 84, '2019-10-23', 2000, 202000),
-(8, 1, 81, '2019-10-23', 2000, 1002000),
-(9, 1, 88, '2019-10-23', 2000, 77000),
-(10, 1, 89, '2019-10-23', 2000, 32000),
-(11, 1, 82, '2019-10-23', 2000, 202000),
-(12, 1, 83, '2019-10-23', 2000, 402000),
-(13, 1, 85, '2019-10-23', 2000, 1002000),
-(14, 1, 86, '2019-10-23', 2000, 6002000),
-(15, 1, 87, '2019-10-23', 2000, 3002000),
-(16, 1, 91, '2019-10-23', 2000, 202000),
-(17, 1, 92, '2019-10-23', 2000, 2102000),
-(18, 1, 93, '2019-10-23', 2000, 602000),
-(19, 1, 94, '2019-10-24', 2000, 3702000),
-(20, 1, 95, '2019-10-24', 2000, 2002000),
-(21, 1, 96, '2019-10-24', 2000, 2302000),
-(22, 1, 97, '2019-10-24', 2000, 2002000),
-(23, 1, 98, '2019-10-24', 2000, 1702000);
+(1, 1, 26, '2023-05-07', 2000, 452000),
+(2, 1, 27, '2023-05-07', 2000, 3002000);
 
 --
 -- Triggers `pembayaran`
@@ -137,24 +125,10 @@ CREATE TABLE `penggunaan` (
 --
 
 INSERT INTO `penggunaan` (`id_penggunaan`, `no_meter`, `bulan`, `tahun`, `meter_awal`, `meter_akhir`) VALUES
-(83, '1111', 10, 2019, 10, 60),
-(84, '1111', 11, 2019, 60, 70),
-(85, '1111', 12, 2019, 70, 90),
-(86, '1111', 1, 2020, 90, 100),
-(87, '1111', 2, 2020, 100, 150),
-(88, '1111', 3, 2020, 150, 450),
-(89, '1111', 4, 2020, 450, 600),
-(90, '2121', 10, 2019, 30, 80),
-(91, '2121', 11, 2019, 80, 100),
-(92, '2121', 12, 2019, 100, 130),
-(93, '2222', 10, 2019, 70, 80),
-(94, '2222', 11, 2019, 80, 185),
-(95, '2222', 12, 2019, 185, 215),
-(96, '2222', 1, 2020, 215, 400),
-(97, '2222', 2, 2020, 400, 500),
-(98, '2222', 3, 2020, 500, 615),
-(99, '1111', 5, 2020, 600, 700),
-(100, '1111', 6, 2020, 700, 785);
+(1, '0232120417', 5, 2023, 750, 900),
+(2, '3969545812', 5, 2023, 900, 1200),
+(3, '5542872143', 5, 2023, 750, 900),
+(4, '5542872143', 6, 2023, 900, 1200);
 
 --
 -- Triggers `penggunaan`
@@ -192,24 +166,10 @@ CREATE TABLE `tagihan` (
 --
 
 INSERT INTO `tagihan` (`id_tagihan`, `id_penggunaan`, `jumlah_meter`, `status`) VALUES
-(81, 83, 50, 1),
-(82, 84, 10, 1),
-(83, 85, 20, 1),
-(84, 86, 10, 1),
-(85, 87, 50, 1),
-(86, 88, 300, 1),
-(87, 89, 150, 1),
-(88, 90, 50, 1),
-(89, 91, 20, 1),
-(90, 92, 30, 0),
-(91, 93, 10, 1),
-(92, 94, 105, 1),
-(93, 95, 30, 1),
-(94, 96, 185, 1),
-(95, 97, 100, 1),
-(96, 98, 115, 1),
-(97, 99, 100, 1),
-(98, 100, 85, 1);
+(25, 1, 150, 0),
+(26, 2, 300, 1),
+(27, 3, 150, 1),
+(28, 4, 300, 0);
 
 --
 -- Triggers `tagihan`
@@ -230,16 +190,17 @@ DELIMITER ;
 CREATE TABLE `tarif` (
   `id_tarif` int NOT NULL,
   `daya` int NOT NULL,
-  `tarif_kwh` int NOT NULL
+  `tarif_kwh` int NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tarif`
 --
 
-INSERT INTO `tarif` (`id_tarif`, `daya`, `tarif_kwh`) VALUES
-(4, 3400, 20000),
-(5, 900, 1500);
+INSERT INTO `tarif` (`id_tarif`, `daya`, `tarif_kwh`, `status`) VALUES
+(1, 3400, 20000, 1),
+(2, 900, 10000, 1);
 
 --
 -- Indexes for dumped tables
@@ -257,7 +218,8 @@ ALTER TABLE `login`
 ALTER TABLE `meter`
   ADD PRIMARY KEY (`id_meter`),
   ADD UNIQUE KEY `no_meter` (`no_meter`),
-  ADD KEY `id_tarif` (`id_tarif`);
+  ADD KEY `id_tarif` (`id_tarif`),
+  ADD KEY `id_login` (`id_login`);
 
 --
 -- Indexes for table `pembayaran`
@@ -296,31 +258,31 @@ ALTER TABLE `tarif`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_login` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `meter`
 --
 ALTER TABLE `meter`
-  MODIFY `id_meter` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_meter` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penggunaan`
 --
 ALTER TABLE `penggunaan`
-  MODIFY `id_penggunaan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id_penggunaan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  MODIFY `id_tagihan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id_tagihan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tarif`
@@ -336,26 +298,21 @@ ALTER TABLE `tarif`
 -- Constraints for table `meter`
 --
 ALTER TABLE `meter`
-  ADD CONSTRAINT `meter_ibfk_1` FOREIGN KEY (`id_tarif`) REFERENCES `tarif` (`id_tarif`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `meter_ibfk_1` FOREIGN KEY (`id_tarif`) REFERENCES `tarif` (`id_tarif`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `meter_ibfk_2` FOREIGN KEY (`id_login`) REFERENCES `login` (`id_login`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_login`) REFERENCES `login` (`id_login`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_tagihan`) REFERENCES `tagihan` (`id_tagihan`);
-
---
--- Constraints for table `penggunaan`
---
-ALTER TABLE `penggunaan`
-  ADD CONSTRAINT `penggunaan_ibfk_1` FOREIGN KEY (`no_meter`) REFERENCES `meter` (`no_meter`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_login`) REFERENCES `login` (`id_login`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_tagihan`) REFERENCES `tagihan` (`id_tagihan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tagihan`
 --
 ALTER TABLE `tagihan`
-  ADD CONSTRAINT `tagihan_ibfk_1` FOREIGN KEY (`id_penggunaan`) REFERENCES `penggunaan` (`id_penggunaan`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tagihan_ibfk_1` FOREIGN KEY (`id_penggunaan`) REFERENCES `penggunaan` (`id_penggunaan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
