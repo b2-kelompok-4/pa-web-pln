@@ -116,9 +116,85 @@ Sama seperti pembayaran di User bedanya pada staff bisa melakukan semua pembayar
 
 
 
+## 3. Admin
 
+Pada Halaman Admin terdapat 5 menu yaitu Tarif, Pelanggan, Penggunaan, Tagihan dan List Staff
+### a. Login sebagai Admin
 
+Disini kita akan masuk sebagai admin, caranya adalah masukkan username 'admin' dengan password yang sama juga yaitu 'admin'
 
+![1](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/cb05a965-e3fc-408c-aa7e-6b874581a168)
 
+### b. Tampilan Halaman Admin
 
+Ini adalah tampilan utama halaman admin, pada dasarnya, isi halaman admin hampir sama dengan staff, bedanya pada halaman admin tidak bisa melakukan pembayaran, proses pembayaran hanya bisa dilakukan oleh user dan staff, selain itu pada halaman admin juga diberi kemampuan untuk memanajemen staff, artinya admin dapat memambah, mengubah, maupun menghapus staff
 
+![2](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/c60479c9-9c06-4f2b-890f-b85b0f18964a)
+
+### c. Menu List Staff
+
+Sekarang pergi ke halaman List Staff, disinilah fungsi managemen akan berjalan
+
+![3](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/6e319c2a-da47-46c1-ad6b-6eaef87f6915)
+
+### d. Tambah Staff
+
+Pertama kita menambah data, sebagai contoh, disini data yang saya masukkan berisi nama Ali Khatami, username ali dan password juga ali
+
+![4](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/be942784-1263-4f1e-8f4d-358859a604ce)
+
+Setelah data tersebut berhasil ditambahkan, maka tampilannya akan menjadi seperti ini (data Ali Khatami telah ditambahkan)
+
+![5](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/245a9402-7480-4b36-91ef-9737ab2f71e6)
+
+### e. Login sebagai Staff baru
+
+Kemudian kita logout dan login lagi menggunakan data staff yang baru saja kita tambahkan dari halaman admin tadi (username : ali, password ali), jika data benar, maka staff Ali Khatami berhasil login, jika gagal tentunya web akan memberikan pemberitahuan username atau password salah
+
+![6](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/51c5477f-82bf-4993-89c0-bde24c49d010)
+
+### f. Tampilan Halaman Staff
+
+Inilah hasil tampilan dari halaman staff yang baru saja kita tambahkan tadi dari halaman admin, sekarang kita kembali login lagi sebagai admin kemudian masuk lagi ke menu list staff
+
+![7](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/b5fe9103-cddb-4f19-9db4-e3d57b751f91)
+
+### g. Mengedit Data
+
+Selain menambah data, kita juga dapat mengedit data yang telah ada, misal disini saya ingin mengubah data ali menjadi ali2, kemudian simpan
+
+![8](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/4d938ddc-a612-4c27-bb4b-7f549abe82e6)
+
+![9](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/14b311b4-44e6-4e1c-9d84-42f6c4f82feb)
+
+Maka data Ali Khatami akan menjadi Ali Khatami2, ini terjadi karna data tersebut telah di edit
+
+![10](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/f08306f5-2079-4610-a73f-3f185c8fe989)
+
+### h. Login sebagai Staff yang datanya telah di edit
+
+Sekarang kita login lagi dengan memasukkan username ali dan password ali, lihat apa yang terjadi, login gagal, ini karna data staff tersebut sudah tidak sama lagi seperti di awal karena sudah di edit
+
+![11](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/040e27b8-6441-47df-a445-bde2c0015ba7)
+
+Lalu kita ubah datanya menjadi ali2 dan kemudian mencoba login
+
+![12](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/da74e21f-e66d-4ac0-bc28-60d330453ee9)
+
+Hasilnya login berhasil karena data tersebut sesuai dengan apa yang tersedia
+
+![13](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/e51fb340-3a56-4a16-8ed8-71f16a64579f)
+
+### i. Menghapus Data
+
+Terakhir kita juga dapat menghapus data staff tersebut 
+
+![14](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/ee2586aa-1226-41a6-a4b1-4bb80f3c394d)
+
+Setelah data dihapus, otomatis data login staff pun akan ikut terhapus
+
+![15](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/c2227b2d-e11b-4ed7-821d-750bde2e11f6)
+
+Ini berarti kita tidak dapat login lagi menggunakan data tersebut
+
+![16](https://github.com/Servant7/pa-web-pln-ali/assets/94286362/aa94ffb9-8708-419f-be3e-b6b699d163eb)
