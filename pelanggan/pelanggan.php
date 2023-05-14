@@ -122,7 +122,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="nama">Nama</label>
-                                                                        <input type="text" class="form-control" id="nama" name="nama" required value="<?php echo $row['pemilik'] ?>">
+                                                                        <input type="text" class="form-control" id="nama" name="nama" required pattern="[A-Za-z\s]+" value="<?php echo $row['pemilik'] ?>">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="alamat">Alamat</label>
@@ -130,7 +130,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="telp">No. Telepon</label>
-                                                                        <input type="text" class="form-control" id="telp" name="telp" required value="<?php echo $row['telp'] ?>">
+                                                                        <input type="text" class="form-control" id="telp" name="telp" required pattern="\d{12}" value="<?php echo $row['telp'] ?>">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="tarif">Tarif</label>

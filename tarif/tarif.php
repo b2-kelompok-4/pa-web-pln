@@ -216,6 +216,16 @@
     ?>
 
     <script type="text/javascript">
+        //membuat form daya tidak bisa bernilai minus
+        var inputs = document.querySelectorAll('input[id^="daya"]');
+        inputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                if (this.value < 0) {
+                    this.value = 0;
+                }
+            });
+        });
+
         // Data Table
         $(document).ready(function() {
             $('.data').DataTable();
