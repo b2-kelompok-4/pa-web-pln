@@ -134,7 +134,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="tarif">Tarif</label>
-                                                                        <select name="tarif" id="tarif" class="form-control">
+                                                                        <select name="tarif" id="tarif" class="form-select">
                                                                             <?php $tarif = mysqli_query($conn, "SELECT * FROM tarif");
                                                                             while ($result = mysqli_fetch_assoc($tarif)) { ?>
                                                                                 <option value="<?php echo $result['id_tarif'] ?>" <?php if ($row['id_tarif'] == $result['id_tarif']) {

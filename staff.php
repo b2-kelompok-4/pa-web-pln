@@ -34,7 +34,7 @@ $nama = $row['nama'];
                 <li><a href="staff.php?page=tarif">Tarif</a></li>
                 <li><a href="staff.php?page=pelanggan">Pelanggan</a></li>
                 <li><a href="staff.php?page=penggunaan">Penggunaan</a></li>
-                <li><a href="staff.php?page=tagihan">Tagihan</a></li>
+                <li><a href="b">Tagihan</a></li>
                 <li><a href="staff.php?page=pembayaran">Pembayaran</a></li>
             </ul>
         </div>

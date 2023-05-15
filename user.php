@@ -12,7 +12,7 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $nama = $row['nama'];
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,27 +42,27 @@ $nama = $row['nama'];
                     <a href="logout.php" class="btn-xs btn-biru">Logout</a>
                 </div>
             </div>
-            <div class="info">
-                <?php
-                if (isset($_GET['page'])) {
-                    if ($_GET['page'] == 'penggunaan') {
-                        include 'pembayaran/penggunaan.php';
-                    } elseif ($_GET['page'] == 'bayar') {
-                        include 'pembayaran/bayar.php';
-                    } elseif ($_GET['page'] == 'history') {
-                        include 'pembayaran/history.php';
-                    } elseif ($_GET['page'] == 'daftar') {
-                        include 'daftar.php';
-                    } elseif ($_GET['page'] == 'tagihan') {
-                        include 'tagihan/tagihan.php';
-                    } elseif ($_GET['page'] == 'pembayaran') {
-                        include 'pembayaran/pembayaran.php';
-                    }
-                } else {
-                    echo 'Halo Selamat Datang ' . $nama;
-                }
-                ?>
-            </div>
+            <div class="info"> -->
+<?php
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'penggunaan') {
+        include 'pembayaran/penggunaan.php';
+    } elseif ($_GET['page'] == 'bayar') {
+        include 'pembayaran/bayar.php';
+    } elseif ($_GET['page'] == 'history') {
+        include 'pembayaran/history.php';
+    } elseif ($_GET['page'] == 'daftar') {
+        include 'daftar/daftar.php';
+    } elseif ($_GET['page'] == 'tagihan') {
+        include 'tagihan/tagihan.php';
+    } elseif ($_GET['page'] == 'pembayaran') {
+        include 'pembayaran/pembayaran.php';
+    }
+} else {
+    include 'daftar/daftar.php';
+}
+?>
+<!-- </div>
         </div>
     </div>
     <div class="footer footer2">
@@ -70,4 +70,4 @@ $nama = $row['nama'];
     </div>
 </body>
 
-</html>
+</html> -->

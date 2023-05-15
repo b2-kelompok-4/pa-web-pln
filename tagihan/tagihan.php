@@ -54,53 +54,151 @@
                     <div class="card bg-gradient-secondary shadow">
                         <div class="card-header bg-transparent">
                             <div class="col-xl-12">
-                                <h1>Daftar Tagihan</h1>
-                                <div class="row align-items-center mt-4">
-                                    <div class="col">
-                                        <table class="table table-bordered data hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>No Meter</th>
-                                                    <th>Nama</th>
-                                                    <th>Bulan</th>
-                                                    <th>Tahun</th>
-                                                    <th>Pemakaian</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $id_login = $_SESSION['id_login'];
-                                                $no = 1;
-                                                $sql = mysqli_query($conn, "SELECT tagihan.*, penggunaan.*, meter.no_meter, meter.pemilik FROM tagihan 
-                                                    INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
-                                                    INNER JOIN meter ON penggunaan.no_meter=meter.no_meter 
-                                                    ORDER BY bulan, tahun ASC;");
+                                <?php
+                                $id_login = $_SESSION['id_login'];
+                                $no = 1;
 
-                                                while ($row = mysqli_fetch_assoc($sql)) {
+                                // QUERY UNTUK MENGAMBIL DATA TAGIHAN PENGGUNA DI ADMIN ATAU STAFF
+                                $sql = mysqli_query($conn, "SELECT tagihan.*, penggunaan.*, meter.no_meter, meter.pemilik FROM tagihan 
+                                     INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+                                     INNER JOIN meter ON penggunaan.no_meter=meter.no_meter 
+                                     ORDER BY bulan, tahun ASC;");
+
+                                // QUERY UNTUK MENGAMBIL DATA TAGIHAN PENGGUNA DI USER
+                                $sql_user = mysqli_query($conn, "SELECT tagihan.*, penggunaan.*, meter.no_meter, meter.pemilik FROM tagihan 
+                                INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+                                INNER JOIN meter ON penggunaan.no_meter=meter.no_meter 
+                                WHERE meter.id_login = '$id_login' 
+                                ORDER BY bulan, tahun ASC;");
+
+                                if ($_SESSION['role'] != 'user') {
+                                    if (mysqli_num_rows($sql) > 0) { ?>
+                                        <h1>Daftar Tagihan</h1>
+                                        <div class="row align-items-center mt-4">
+                                            <div class="col">
+                                                <table class="table table-bordered data hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>No. Meter</th>
+                                                            <th>Nama</th>
+                                                            <th>Bulan</th>
+                                                            <th>Tahun</th>
+                                                            <th>Pemakaian</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        while ($row = mysqli_fetch_assoc($sql)) {
+                                                            $status = $row['status'];
+                                                            if ($status == 1) {
+                                                                $status = '<a class="text-primary>Sudah Bayar</a>';
+                                                            } else {
+                                                                $status = '<a style="color: red;">Belum Bayar</a>';
+                                                            } ?>
+                                                            <tr>
+                                                                <td> <?= $no++ ?> </td>
+                                                                <td> <?= $row['no_meter'] ?> </td>
+                                                                <td> <?= $row['pemilik'] ?> </td>
+                                                                <td><?= bulan($row['bulan']) ?> </td>
+                                                                <td> <?= $row['tahun'] ?> </td>
+                                                                <td> <?= $row['jumlah_meter'] ?> KWH</td>
+                                                                <td> <?= $status ?> </td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <?php
+                                    } else {
+                                        echo "<h1>TIDAK ADA DAFTAR TAGIHAN</h1>";
+                                    }
+                                } else {
+                                    if (mysqli_num_rows($sql_user) > 0) {
+                                        $query = mysqli_query($conn, "SELECT meter.no_meter, meter.pemilik, meter.alamat, tarif.daya FROM tarif INNER JOIN meter ON tarif.id_tarif=meter.id_tarif WHERE meter.id_login='$id_login'");
+                                        $result = mysqli_fetch_assoc($query);
+                                        ?>
+                                            <h1 align="center">Cek Tagihan</h1>
+                                            <br>
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td align='left'>No. Meter</td>
+                                                    <td><b>:</b></td>
+                                                    <td><?= $result['no_meter'] ?></td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td align='left'>Nama</td>
+                                                    <td><b>:</b></td>
+                                                    <td><?= $result['pemilik'] ?></td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td align='left'>Alamat</td>
+                                                    <td><b>:</b></td>
+                                                    <td><?= $result['alamat'] ?></td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td align='left'>Daya</td>
+                                                    <td><b>:</b></td>
+                                                    <td><?= $result['daya'] ?> VA</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <br>
+                                            <h1 align="center">Detail Tagihan</h1>
+                                            <br>
+                                            <table class="table table-bordered data-user hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>No. Meter</th>
+                                                        <th>Nama</th>
+                                                        <th>Bulan</th>
+                                                        <th>Tahun</th>
+                                                        <th>Pemakaian</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <?php
+                                                while ($row = mysqli_fetch_assoc($sql_user)) {
                                                     $status = $row['status'];
                                                     if ($status == 1) {
-                                                        $status = '<a class="text-primary>Sudah dibayar</a>';
+                                                        $status = '<a class="text-info>Sudah Bayar</a>';
                                                     } else {
-                                                        $status = '<a style="color: red;">Belum dibayar</a>';
+                                                        $status = '<a style="color: red;">Belum Bayar</a>';
                                                     } ?>
-                                                    <tr>
-                                                        <td> <?= $no++ ?> </td>
-                                                        <td> <?= $row['no_meter'] ?> </td>
-                                                        <td> <?= $row['pemilik'] ?> </td>
-                                                        <td><?= bulan($row['bulan']) ?> </td>
-                                                        <td> <?= $row['tahun'] ?> </td>
-                                                        <td> <?= $row['jumlah_meter'] ?> KWH</td>
-                                                        <td> <?= $status ?> </td>
-                                                    </tr>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?= $no++ ?> </td>
+                                                            <td><?= $row['no_meter'] ?> </td>
+                                                            <td><?= $row['pemilik'] ?> </td>
+                                                            <td><?= bulan($row['bulan']) ?> </td>
+                                                            <td><?= $row['tahun'] ?> </td>
+                                                            <td><?= $row['jumlah_meter'] ?> KWH</td>
+                                                            <td><?= $status ?> </td>
+                                                        </tr>
+                                                    </tbody>
                                                 <?php
                                                 }
                                                 ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                            </table>
+                                    <?php
+                                    } else {
+                                        echo "<h1>TIDAK ADA DAFTAR TAGIHAN</h1>";
+                                    }
+                                }
+                                    ?>
+                                        </div>
                             </div>
                         </div>
                     </div>
@@ -145,11 +243,21 @@
         ?>
 
         <script type="text/javascript">
-            // Data Table
+            // Data Table ADMIN/STAFF
             $(document).ready(function() {
                 $('.data').DataTable();
             });
 
+            // Data Table USER
+            $(document).ready(function() {
+                $('.data-user').DataTable({
+                    searching: false,
+                    paging: false,
+                    info: false,
+                    ordering: false
+
+                });
+            });
 
 
             // Hapus Data
