@@ -91,12 +91,8 @@
                                                     <tbody>
                                                         <?php
                                                         while ($row = mysqli_fetch_assoc($sql)) {
-                                                            $status = $row['status'];
-                                                            if ($status == 1) {
-                                                                $status = '<a class="text-primary>Sudah Bayar</a>';
-                                                            } else {
-                                                                $status = '<a style="color: red;">Belum Bayar</a>';
-                                                            } ?>
+                                                            $status = $row['status'] == 1 ? '<a style="color: green;">Sudah Bayar</a>' : '<a style="color: red;">Belum Bayar</a>';
+                                                            ?>
                                                             <tr>
                                                                 <td> <?= $no++ ?> </td>
                                                                 <td> <?= $row['no_meter'] ?> </td>
@@ -104,7 +100,8 @@
                                                                 <td><?= bulan($row['bulan']) ?> </td>
                                                                 <td> <?= $row['tahun'] ?> </td>
                                                                 <td> <?= $row['jumlah_meter'] ?> KWH</td>
-                                                                <td> <?= $status ?> </td>
+                                                                <td><?= $status ?></td>
+
                                                             </tr>
                                                         <?php
                                                         }
@@ -171,12 +168,8 @@
                                                 </thead>
                                                 <?php
                                                 while ($row = mysqli_fetch_assoc($sql_user)) {
-                                                    $status = $row['status'];
-                                                    if ($status == 1) {
-                                                        $status = '<a class="text-info>Sudah Bayar</a>';
-                                                    } else {
-                                                        $status = '<a style="color: red;">Belum Bayar</a>';
-                                                    } ?>
+                                                    $status = $row['status'] == 1 ? '<a style="color: green;">Sudah Bayar</a>' : '<a style="color: red;">Belum Bayar</a>'; 
+                                                    ?>
                                                     <tbody>
                                                         <tr>
                                                             <td><?= $no++ ?> </td>
@@ -185,7 +178,7 @@
                                                             <td><?= bulan($row['bulan']) ?> </td>
                                                             <td><?= $row['tahun'] ?> </td>
                                                             <td><?= $row['jumlah_meter'] ?> KWH</td>
-                                                            <td><?= $status ?> </td>
+                                                            <td><?= $status ?></td>
                                                         </tr>
                                                     </tbody>
                                                 <?php

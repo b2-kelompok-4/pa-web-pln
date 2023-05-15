@@ -35,3 +35,17 @@
         }
     }
 ?>
+
+<script type="text/javascript">
+    var makhirInput = document.getElementById('makhir');
+
+    makhirInput.addEventListener('input', function() {
+      // Hanya menerima angka
+      this.value = this.value.replace(/[^0-9]/g, '');
+
+      // Menghindari nilai negatif
+      if (this.value < 0) {
+        this.value = 0;
+      }
+    });
+</script>
