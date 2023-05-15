@@ -1,7 +1,7 @@
 <?php
 include 'include/config.php';
 session_start();
-if ($_SESSION['status'] != 'login' && $_SESSION['role'] != 'staff') {
+if ($_SESSION['status'] != 'login' && $_SESSION['role'] != 'admin') {
     header('location: login.php?pesan=belum_login');
 }
 
@@ -11,7 +11,7 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $nama = $row['nama'];
 ?>
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,62 +45,62 @@ $nama = $row['nama'];
                     <a href="logout.php" class="btn-xs btn-biru">Logout</a>
                 </div>
             </div>
-            <div class="info">
-                <?php
-                if (isset($_GET['page'])) {
-                    if ($_GET['page'] == 'tarif') {
-                        include 'tarif/tarif.php';
-                    } elseif ($_GET['page'] == 'addTarif') {
-                        include 'tarif/add.php';
-                    } elseif ($_GET['page'] == 'editTarif') {
-                        include 'tarif/edit.php';
-                    } elseif ($_GET['page'] == 'deleteTarif') {
-                        include 'tarif/delete.php';
-                    } elseif ($_GET['page'] == 'pelanggan') {
-                        include 'pelanggan/pelanggan.php';
-                    } elseif ($_GET['page'] == 'activatePelanggan') {
-                        include 'pelanggan/aktifasi.php';
-                    } elseif ($_GET['page'] == 'addPelanggan') {
-                        include 'pelanggan/add.php';
-                    } elseif ($_GET['page'] == 'editPelanggan') {
-                        include 'pelanggan/edit.php';
-                    } elseif ($_GET['page'] == 'deletePelanggan') {
-                        include 'pelanggan/delete.php';
-                    } elseif ($_GET['page'] == 'penggunaan') {
-                        include 'penggunaan/penggunaan.php';
-                    } elseif ($_GET['page'] == 'tagihan') {
-                        include 'tagihan/tagihan.php';
-                    } elseif ($_GET['page'] == 'addPenggunaan') {
-                        include 'penggunaan/add.php';
-                    } elseif ($_GET['page'] == 'editPenggunaan') {
-                        include 'penggunaan/edit.php';
-                    } elseif ($_GET['page'] == 'addMakhir') {
-                        include 'penggunaan/addMakhir.php';
-                    } elseif ($_GET['page'] == 'history') {
-                        include 'pembayaran/history.php';
-                    } elseif ($_GET['page'] == 'petugas') {
-                        include 'petugas/petugas.php';
-                    } elseif ($_GET['page'] == 'addPetugas') {
-                        include 'petugas/add.php';
-                    } elseif ($_GET['page'] == 'listStaff') {
-                        include 'list_staff/staff.php';
-                    } elseif ($_GET['page'] == 'addStaff') {
-                        include 'list_staff/add.php';
-                    } elseif ($_GET['page'] == 'editStaff') {
-                        include 'list_staff/edit.php';
-                    } elseif ($_GET['page'] == 'deleteStaff') {
-                        include 'list_staff/delete.php';
-                    }
-                } else {
-                    include 'tarif/tarif.php';
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="footer footer2">
-        <p align="center">Copyright &copy; 2023 B2 Kelompok 4</p>
-    </div>
+            <div class="info"> -->
+<?php
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'tarif') {
+        include 'tarif/tarif.php';
+    } elseif ($_GET['page'] == 'addTarif') {
+        include 'tarif/add.php';
+    } elseif ($_GET['page'] == 'editTarif') {
+        include 'tarif/edit.php';
+    } elseif ($_GET['page'] == 'deleteTarif') {
+        include 'tarif/delete.php';
+    } elseif ($_GET['page'] == 'pelanggan') {
+        include 'pelanggan/pelanggan.php';
+    } elseif ($_GET['page'] == 'activatePelanggan') {
+        include 'pelanggan/aktifasi.php';
+    } elseif ($_GET['page'] == 'addPelanggan') {
+        include 'pelanggan/add.php';
+    } elseif ($_GET['page'] == 'editPelanggan') {
+        include 'pelanggan/edit.php';
+    } elseif ($_GET['page'] == 'deletePelanggan') {
+        include 'pelanggan/delete.php';
+    } elseif ($_GET['page'] == 'penggunaan') {
+        include 'penggunaan/penggunaan.php';
+    } elseif ($_GET['page'] == 'tagihan') {
+        include 'tagihan/tagihan.php';
+    } elseif ($_GET['page'] == 'addPenggunaan') {
+        include 'penggunaan/add.php';
+    } elseif ($_GET['page'] == 'editPenggunaan') {
+        include 'penggunaan/edit.php';
+    } elseif ($_GET['page'] == 'addMakhir') {
+        include 'penggunaan/addMakhir.php';
+    } elseif ($_GET['page'] == 'history') {
+        include 'pembayaran/history.php';
+    } elseif ($_GET['page'] == 'petugas') {
+        include 'petugas/petugas.php';
+    } elseif ($_GET['page'] == 'addPetugas') {
+        include 'petugas/add.php';
+    } elseif ($_GET['page'] == 'listStaff') {
+        include 'list_staff/staff.php';
+    } elseif ($_GET['page'] == 'addStaff') {
+        include 'list_staff/add.php';
+    } elseif ($_GET['page'] == 'editStaff') {
+        include 'list_staff/edit.php';
+    } elseif ($_GET['page'] == 'deleteStaff') {
+        include 'list_staff/delete.php';
+    }
+} else {
+    include 'tarif/tarif.php';
+}
+?>
+<!-- </div>
+</div>
+</div>
+<div class="footer footer2">
+    <p align="center">Copyright &copy; 2023 B2 Kelompok 4</p>
+</div>
 </body>
 
-</html>
+</html> -->
