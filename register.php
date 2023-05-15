@@ -76,7 +76,7 @@ if (isset($_POST['login'])) {
             if ($result) {
                 echo "<script>
                     alert('Registrasi berhasil')
-                    document.location.href='index.php';
+                    document.location.href='login.php';
                      </script> ";
             } else {
                 echo "<script>
