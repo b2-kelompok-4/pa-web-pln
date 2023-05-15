@@ -56,11 +56,11 @@
                             <?php
                             if ($_SESSION['role'] == 'staff') { ?>
                                 <div class="col-xl-12">
-                                    <h1>Manage Data Pembayaran</h1>
+                                    <h1>Pembayaran Listrik</h1>
                                 </div>
                                 <div class="row align-items-center mt-4">
                                     <div class="col">
-                                        <table class="mt-5 table table-bordered data hover">
+                                        <table class="table table-bordered data hover">
                                             <thead>
                                                 <tr>
                                                     <th>No. Meter</th>
@@ -73,16 +73,76 @@
                                                 </tr>
                                             </thead>
                                             <?php
-                                            $meter = $_POST['meter'];
-
+                                            $id_login = $_SESSION['id_login'];
+                                            $query = mysqli_query($conn, "SELECT meter.id_meter,meter.no_meter,meter.pemilik,tagihan.id_tagihan,tagihan.jumlah_meter,tagihan.status,penggunaan.bulan,penggunaan.tahun FROM tagihan 
+                                             INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+                                             INNER JOIN meter ON penggunaan.no_meter=meter.no_meter");
                                             while ($row = mysqli_fetch_assoc($query)) {
                                                 $status = $row['status'];
                                                 if ($status == 1) {
-                                                    $status = 'Sudah Bayar';
+                                                    $status = '<span class="text-success">Sudah Bayar</span>';
                                                 } else {
-                                                    $status = 'Belum Bayar';
-                                                    $button = ($_SESSION['role'] == 'user') ? "<a href='user.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn-xs btn-biru'>Bayar</a>";
+                                                    $status = '<span style="color: red;">Belum Bayar</span>';
                                             ?>
+                                                    <!-- Modal Bayar DI STAFF ADMIN -->
+                                                    <div class="modal fade" id="modal_bayar<?= $row['id_tagihan'] ?>">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+
+                                                                <!-- Modal Header -->
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Pembayaran Listrik</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+
+                                                                <!-- Modal body -->
+                                                                <div class="modal-body">
+                                                                    <form method="POST" action="pembayaran/bayar.php">
+                                                                        <input type="text" name="id_login" hidden value="<?= $id_login ?>">
+                                                                        <input type="text" name="id_tagihan" hidden value="<?= $row['id_tagihan'] ?>">
+                                                                        <?php
+                                                                        $id_tagihan = $row['id_tagihan'];
+                                                                        $query_user = mysqli_query($conn, "SELECT * FROM tagihan INNER JOIN penggunaan ON penggunaan.id_penggunaan = tagihan.id_penggunaan INNER JOIN meter ON meter.no_meter = penggunaan.no_meter INNER JOIN tarif ON tarif.id_tarif = meter.id_tarif WHERE tagihan.id_tagihan = '$id_tagihan'");
+                                                                        $row_user = mysqli_fetch_assoc($query_user);
+                                                                        $no_meter_user = $row_user['no_meter'];
+                                                                        $tarif = $row_user['tarif_kwh'];
+                                                                        $penggunaan = $row_user['jumlah_meter'];
+                                                                        $tagihan = $tarif * $penggunaan;
+                                                                        $total = $tagihan + 2000;
+                                                                        ?>
+                                                                        <div class="form-group">
+                                                                            <label for="daya">No. Meter:</label>
+                                                                            <input type="number" class="form-control" id="daya" name="daya" value="<?= $no_meter_user ?>" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="penggunaan">Penggunaan:</label>
+                                                                            <input type="text" class="form-control" id="penggunaan" name="penggunaan" value="<?php echo $penggunaan ?> KWH" readonly required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="tagihan">Tagihan (Rp.)</label>
+                                                                            <input type="text" id="tagihan" class="form-control" name="tagihan" readonly value="<?php echo $tagihan ?>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="biaya">Biaya Admin (Rp.)</label>
+                                                                            <input type="text" id="biaya" class="form-control" readonly value="<?php echo 2000 ?>" name="biaya_admin">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="total">Total (Rp.)</label>
+                                                                            <input type="text" id="total" class="form-control" readonly value="<?php echo $total ?>" name="total">
+                                                                        </div>
+                                                                        <button type="submit" name="submit" class="btn btn-info">Bayar</button>
+                                                                    </form>
+                                                                </div>
+
+                                                                <!-- Modal footer -->
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal Bayar Di STAFF ATAU ADMIN -->
                                                     <tbody>
                                                         <tr>
                                                             <td><?php echo $row['no_meter'] ?></td>
@@ -91,7 +151,7 @@
                                                             <td><?php echo 'bulan'($row['bulan']) ?></td>
                                                             <td><?php echo $row['tahun'] ?></td>
                                                             <td><?php echo $status; ?></td>
-                                                            <td><?php echo $button; ?></td>
+                                                            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_bayar<?= $row['id_tagihan'] ?>"><i class="fa fa-credit-card text-primary mr-2"></i>Bayar</button></td>
                                                         </tr>
                                                 <?php
                                                 }
@@ -121,19 +181,17 @@
                                                 </tr>
                                             </thead>
                                             <?php
-
                                             $id_login = $_SESSION['id_login'];
-
                                             $query = mysqli_query($conn, "SELECT meter.id_meter,meter.no_meter,meter.pemilik,tagihan.id_tagihan,tagihan.jumlah_meter,tagihan.status,penggunaan.bulan,penggunaan.tahun FROM tagihan 
-                                INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
-                                INNER JOIN meter ON penggunaan.no_meter=meter.no_meter  WHERE meter.id_login = '$id_login'");
+                                            INNER JOIN penggunaan ON tagihan.id_penggunaan=penggunaan.id_penggunaan 
+                                            INNER JOIN meter ON penggunaan.no_meter=meter.no_meter  WHERE meter.id_login = '$id_login'");
 
                                             while ($row = mysqli_fetch_assoc($query)) {
                                                 $status = $row['status'];
                                                 if ($status == 1) {
-                                                    $status = 'Sudah Bayar';
+                                                    $status = '<span class="text-success">Sudah Bayar</span>';
                                                 } else {
-                                                    $status = 'Belum Bayar';
+                                                    $status = '<span style="color: red;">Belum Bayar</span>';
                                                     $button = ($_SESSION['role'] == 'user') ? "<a href='user.php?page=bayar&id=$row[id_tagihan]' class='btn btn-info'>Bayar</a>" : "<a href='staff.php?page=bayar&id=$row[id_tagihan]' class='btn btn-info'>Bayar</a>";
                                             ?>
                                                     <!-- Modal Bayar User -->
@@ -235,33 +293,17 @@
                 </script>
             <?php
                 unset($_SESSION['bayar']);
-            } else if (isset($_SESSION['update'])) { ?>
-                <script>
-                    Swal.fire(
-                        'Berhasil!',
-                        '<?php echo $_SESSION['update']; ?>',
-                        'success'
-                    )
-                </script>
-            <?php
-                unset($_SESSION['update']);
-            } else if (isset($_SESSION['eror'])) { ?>
-                <script>
-                    Swal.fire(
-                        'Oops...!',
-                        '<?php echo $_SESSION['eror']; ?>',
-                        'error'
-                    )
-                </script>
-            <?php
-                unset($_SESSION['eror']);
             }
             ?>
 
             <script type="text/javascript">
                 // Data Table Staff
                 $(document).ready(function() {
-                    $('.data').DataTable();
+                    $('.data').DataTable({
+                        // scrollY: "300px",
+                        scrollX: true,
+                        // scrollCollapse: true,
+                    });
                 });
 
                 // Data Table User
